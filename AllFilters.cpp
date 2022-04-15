@@ -9,12 +9,14 @@ void loadImage ();
 void saveImage ();
 void blackandWhite();
 void flipImage();
+void mirrorFilter();
+
 
 int main()
 {
     int filternum;
     cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-    cout << " 1-Black & White Filter\n2-Filp Filter\n0-Exit \nChoose number: ";
+    cout << " 1-Black & White Filter\n2-Filp Filter\n3-Mirror Filter\n0-Exit \nChoose number: ";
     cin >> filternum;
     while(filternum != 0){
         switch(filternum) {
@@ -28,7 +30,11 @@ int main()
                 flipImage();
                 saveImage();
                 break;
-
+            case 3:
+                loadImage();
+                mirrorFilter();
+                saveImage();
+                break;
             default:
                 cout << "INVALID...";
                 break;
@@ -36,7 +42,7 @@ int main()
         cout << endl;
         cout << "THE FILTER APPLIED SUCCESSFULLY...\n";
         cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-        cout << " 1-Black & White Filter\n2-Filp Filter\n0-Exit\nChoose number: ";
+        cout << " 1-Black & White Filter\n2-Filp Filter\n3-Mirror Filter\n0-Exit\nChoose number: ";
         cin >> filternum;
     }
 }
@@ -103,6 +109,44 @@ void flipImage(){
             for (int j = 0; j < SIZE; j++) {
                 //swap the pixels horizontally.
                 swap(image[i][j],image[256-i][j]);
+            }
+        }
+    }
+}
+void mirrorFilter() {
+    char letter;
+    cout
+            << "Do you want to mirror left, right, upper, down\nEnter 'l' for left, 'r' for right, 'u' for upper, 'd' for down:";
+    cin >> letter;
+    while(tolower(letter) != 'l' && tolower(letter) != 'r' && tolower(letter) != 'u' && tolower(letter) != 'd'){
+        cout << "INVALID, Enter 'l' for left, 'r' for right, 'u' for upper, 'd' for down: ";
+        cin >> letter;
+    }
+    if(tolower(letter) == 'l') {
+        for (int i = 0; i < SIZE; ++i) {
+            for (int j = 0; j < SIZE; ++j) {
+                image[i][256-j] = image[i][j];
+            }
+        }
+    }
+    else if(tolower(letter) == 'r') {
+        for (int i = 0; i < SIZE; ++i) {
+            for (int j = 0; j < SIZE; ++j) {
+                image[i][j] = image[i][256 - j];
+            }
+        }
+    }
+    else if(tolower(letter) == 'u') {
+        for (int i = 0; i < SIZE; ++i) {
+            for (int j = 0; j < SIZE; ++j) {
+                image[256-i][j] = image[i][j];
+            }
+        }
+    }
+    else if(tolower(letter) == 'd') {
+        for (int i = 0; i < SIZE; ++i) {
+            for (int j = 0; j < SIZE; ++j) {
+                image[i][j] = image[256-i][j];
             }
         }
     }
