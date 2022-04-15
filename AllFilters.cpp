@@ -1,19 +1,20 @@
 #include <iostream>
 #include "bmplib.cpp"
+#include <cstring>
 
 using namespace std;
 unsigned char image[SIZE][SIZE];
 
-
 void loadImage ();
 void saveImage ();
 void blackandWhite();
+void flipImage();
 
 int main()
 {
     int filternum;
     cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-    cout << " 1-Black & White Filter \n0-Exit \nChoose number: ";
+    cout << " 1-Black & White Filter\n2-Filp Filter\n0-Exit \nChoose number: ";
     cin >> filternum;
     while(filternum != 0){
         switch(filternum) {
@@ -22,6 +23,12 @@ int main()
                 blackandWhite();
                 saveImage();
                 break;
+            case 2:
+                loadImage();
+                flipImage();
+                saveImage();
+                break;
+
             default:
                 cout << "INVALID...";
                 break;
@@ -29,7 +36,7 @@ int main()
         cout << endl;
         cout << "THE FILTER APPLIED SUCCESSFULLY...\n";
         cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-        cout << " 1-Black & White Filter \n0-Exit \nChoose number: ";
+        cout << " 1-Black & White Filter\n2-Filp Filter\n0-Exit\nChoose number: ";
         cin >> filternum;
     }
 }
@@ -75,6 +82,28 @@ void blackandWhite() {
                 //if the pixel is smaller than the average convert this pixel to black color(0).
             else
                 image[i][j] = 0;
+        }
+    }
+}
+
+void flipImage(){
+    char choice;
+    cout << "Choose 'h' for flipping horizontally or 'v' for flipping vertically: ";
+    cin >> choice;
+    if (choice == 'h' || choice == 'H'){
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < 127; j++) {
+                //swap the pixels vertically.
+                swap(image[i][j],image[i][256-j]);
+            }
+        }
+    }
+    else if (choice == 'v' || choice == 'V') {
+        for (int i = 0; i < 127; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                //swap the pixels horizontally.
+                swap(image[i][j],image[256-i][j]);
+            }
         }
     }
 }
