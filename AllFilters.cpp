@@ -7,23 +7,28 @@ unsigned char image[SIZE][SIZE];
 unsigned char image1[SIZE][SIZE];
 unsigned char image2[SIZE][SIZE];
 unsigned char image3[SIZE][SIZE];
+unsigned char newimage[SIZE][SIZE];
 
 void loadImage ();
-void saveImage ();
-void blackandWhite();
-void flipImage();
-void mirrorFilter();
 void loadImage1 ();
 void loadImage2 ();
 void saveImage3 ();
+void saveImage ();
+void savenewImage ();
+void blackandWhite();
+void flipImage();
+void mirrorFilter();
 void MergeFunc();
+void lightenFunc();
+void darkenFunc();
+void shrinkFunc();
 
 
 int main()
 {
     int filternum;
     cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-    cout << " 1-Black & White Filter\n2-Filp Filter\n3-Mirror Filter\n0-Exit \nChoose number: ";
+    cout << " 1-Black & White Filter \n 2-Invert Filter \n 3-Merge Filter \n 4-Flip Image \n 5-Darken and lighten Image \n 6-Rotate image\n 6-Rotate image\n 7-Detect Image\n 8-Enlarge image \n9-Shrink image\n  0-Exit \nChoose number: ";
     cin >> filternum;
     while(filternum != 0){
         switch(filternum) {
@@ -43,6 +48,26 @@ int main()
                 flipImage();
                 saveImage();
                 break;
+            case 5:
+                char choice;
+                cout << "Do you want darken or lighten?\n enter d for darken or l for lighten:";
+                cin >> choice;
+                if (choice == 'l') {
+                    loadImage();
+                    lightenFunc();
+                    saveImage();
+                } else if (choice == 'd') {
+                    loadImage();
+                    darkenFunc();
+                    saveImage();
+                } else
+                    cout << "Invalid operation";
+                break;  
+            case 9:
+                loadImage();
+                shrinkFunc();
+                savenewImage();
+                break;      
             case 'a':
                 loadImage();
                 mirrorFilter();
@@ -59,7 +84,7 @@ int main()
         cin >> filternum;
     }
 }
-
+//_________________________________________
 void loadImage () {
     char imageFileName[100];
 
@@ -71,7 +96,7 @@ void loadImage () {
     strcat (imageFileName, ".bmp");
     readGSBMP(imageFileName, image);
 }
-
+//_________________________________________
 void saveImage () {
     char imageFileName[100];
 
@@ -122,8 +147,19 @@ void saveImage3() {
     strcat (imageFileName3, ".bmp");
     writeGSBMP(imageFileName3, image3);
 }
+//_________________________________________
+void savenewImage() {
+    char imageFileName3[100];
 
+    // Get gray scale image target file name
+    cout << "Enter the target image file name: ";
+    cin >> imageFileName3;
 
+    // Add to it .bmp extension and load image
+    strcat (imageFileName3, ".bmp");
+    writeGSBMP(imageFileName3, newimage);
+}
+//_________________________________________
 void blackandWhite() {
     long average = 0;
     for (int i = 0; i < SIZE; i++) {
@@ -144,7 +180,7 @@ void blackandWhite() {
         }
     }
 }
-
+//_________________________________________
 void flipImage(){
     char choice;
     cout << "Choose 'h' for flipping horizontally or 'v' for flipping vertically: ";
@@ -166,6 +202,7 @@ void flipImage(){
         }
     }
 }
+//_________________________________________
 void mirrorFilter() {
     char letter;
     cout
@@ -216,3 +253,36 @@ void MergeFunc() {
 }
 
 
+//_________________________________________
+void lightenFunc() {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+
+            image[i][j] = (image[i][j]+255)/2;
+        }
+    }
+}
+//_________________________________________
+void darkenFunc() {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+
+            image[i][j] = (image[i][j])/2;
+        }
+    }
+}
+//_________________________________________
+void shrinkFunc() {
+    int dim;
+    int dimen;
+    cout <<"Shrink to (1/2, 1/3 or 1/4)?\nPlease enter 2 for 1/2, 3 for 1/3 or 4 for 1/4 : ";
+    cin >> dimen;
+    dim = 2 * dimen;
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+
+            newimage[i/(dim/2)][j/(dim/2)]=(image[i+1][j]+image[i][j+1]+image[i+1][j+1]+image[i][j])/dim;
+
+        }
+    }
+}
