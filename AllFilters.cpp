@@ -28,7 +28,7 @@ int main()
 {
     int filternum;
     cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-    cout << " 1-Black & White Filter \n 2-Invert Filter \n 3-Merge Filter \n 4-Flip Image \n 5-Darken and lighten Image \n 6-Rotate image\n 6-Rotate image\n 7-Detect Image\n 8-Enlarge image \n9-Shrink image\n  0-Exit \nChoose number: ";
+    cout << " 1-Black & White Filter \n 2-Invert Filter \n 3-Merge Filter \n 4-Flip Image \n 5-Darken and lighten Image \n 6-Rotate image\n 7-Detect Image\n 8-Enlarge image \n9-Shrink image\n  0-Exit \nChoose number: ";
     cin >> filternum;
     while(filternum != 0){
         switch(filternum) {
@@ -37,12 +37,12 @@ int main()
                 blackandWhite();
                 saveImage();
                 break;
-             case 3:
+            case 3:
                 loadImage1();
                 loadImage2();
                 MergeFunc();
                 saveImage3();
-                break;    
+                break;
             case 4:
                 loadImage();
                 flipImage();
@@ -62,12 +62,12 @@ int main()
                     saveImage();
                 } else
                     cout << "Invalid operation";
-                break;  
+                break;
             case 9:
                 loadImage();
                 shrinkFunc();
                 savenewImage();
-                break;      
+                break;
             case 'a':
                 loadImage();
                 mirrorFilter();
@@ -80,8 +80,8 @@ int main()
         cout << endl;
         cout << "THE FILTER APPLIED SUCCESSFULLY...\n";
         cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-        cout << " 1-Black & White Filter\n2-Filp Filter\n3-Mirror Filter\n0-Exit\nChoose number: ";
-        cin >> filternum;
+        cout << " 1-Black & White Filter \n 2-Invert Filter \n 3-Merge Filter \n 4-Flip Image \n 5-Darken and lighten Image \n 6-Rotate image\n 7-Detect Image\n 8-Enlarge image \n9-Shrink image\n  0-Exit \nChoose number: ";
+    cin >> filternum;
     }
 }
 //_________________________________________
@@ -286,3 +286,4 @@ void shrinkFunc() {
         }
     }
 }
+
