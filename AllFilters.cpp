@@ -4,12 +4,19 @@
 
 using namespace std;
 unsigned char image[SIZE][SIZE];
+unsigned char image1[SIZE][SIZE];
+unsigned char image2[SIZE][SIZE];
+unsigned char image3[SIZE][SIZE];
 
 void loadImage ();
 void saveImage ();
 void blackandWhite();
 void flipImage();
 void mirrorFilter();
+void loadImage1 ();
+void loadImage2 ();
+void saveImage3 ();
+void MergeFunc();
 
 
 int main()
@@ -25,12 +32,18 @@ int main()
                 blackandWhite();
                 saveImage();
                 break;
-            case 2:
+             case 3:
+                loadImage1();
+                loadImage2();
+                MergeFunc();
+                saveImage3();
+                break;    
+            case 4:
                 loadImage();
                 flipImage();
                 saveImage();
                 break;
-            case 3:
+            case 'a':
                 loadImage();
                 mirrorFilter();
                 saveImage();
@@ -70,6 +83,46 @@ void saveImage () {
     strcat (imageFileName, ".bmp");
     writeGSBMP(imageFileName, image);
 }
+//____________________________________________
+void loadImage1 () {
+    char imageFileName1[100];
+
+    // Get gray scale image file name
+    cout << "Enter the first source image file name: ";
+    cin >> imageFileName1;
+
+    // Add to it .bmp extension and load image
+    strcat (imageFileName1, ".bmp");
+    readGSBMP(imageFileName1, image1);
+}
+
+//_________________________________________
+void loadImage2 () {
+    char imageFileName2[100];
+
+    // Get gray scale image file name
+    cout << "Enter the second source image file name: ";
+    cin >> imageFileName2;
+
+    // Add to it .bmp extension and load image
+    strcat (imageFileName2, ".bmp");
+    readGSBMP(imageFileName2, image2);
+}
+
+//_________________________________________
+
+void saveImage3() {
+    char imageFileName3[100];
+
+    // Get gray scale image target file name
+    cout << "Enter the target image file name: ";
+    cin >> imageFileName3;
+
+    // Add to it .bmp extension and load image
+    strcat (imageFileName3, ".bmp");
+    writeGSBMP(imageFileName3, image3);
+}
+
 
 void blackandWhite() {
     long average = 0;
@@ -151,3 +204,15 @@ void mirrorFilter() {
         }
     }
 }
+
+//_________________________________________
+void MergeFunc() {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+
+            image3[i][j] = (image1[i][j] + image2[i][j])/2 ;
+        }
+    }
+}
+
+
