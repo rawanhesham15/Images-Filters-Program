@@ -12,8 +12,9 @@ unsigned char newimage[SIZE][SIZE];
 void loadImage ();
 void loadImage1 ();
 void loadImage2 ();
-void saveImage3 ();
 void saveImage ();
+void saveImage2();
+void saveImage3 ();
 void savenewImage ();
 void blackandWhite();
 void flipImage();
@@ -21,14 +22,14 @@ void mirrorFilter();
 void MergeFunc();
 void lightenFunc();
 void darkenFunc();
+void detectImageEdges();
 void shrinkFunc();
-
 
 int main()
 {
     int filternum;
     cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-    cout << " 1-Black & White Filter \n 2-Invert Filter \n 3-Merge Filter \n 4-Flip Image \n 5-Darken and lighten Image \n 6-Rotate image\n 7-Detect Image\n 8-Enlarge image \n9-Shrink image\n  0-Exit \nChoose number: ";
+    cout << " 1-Black & White Filter \n 2-Invert Filter \n 3-Merge Filter \n 4-Flip Image \n 5-Rotate Image \n 6-Darken and lighten Image\n7-Detect Edges Filter\n 8-Enlarge Image \n9-Shrink image\n10-Mirror Filter\n11-Shuffle Filter\n12-Blur Filter\n0-Exit \nChoose number: ";
     cin >> filternum;
     while(filternum != 0){
         switch(filternum) {
@@ -48,7 +49,7 @@ int main()
                 flipImage();
                 saveImage();
                 break;
-            case 5:
+            case 6:
                 char choice;
                 cout << "Do you want darken or lighten?\n enter d for darken or l for lighten:";
                 cin >> choice;
@@ -63,12 +64,17 @@ int main()
                 } else
                     cout << "Invalid operation";
                 break;
+            case 7:
+                loadImage();
+                detectImageEdges();
+                saveImage2();
+                break;
             case 9:
                 loadImage();
                 shrinkFunc();
                 savenewImage();
                 break;
-            case 'a':
+            case 10:
                 loadImage();
                 mirrorFilter();
                 saveImage();
@@ -80,10 +86,11 @@ int main()
         cout << endl;
         cout << "THE FILTER APPLIED SUCCESSFULLY...\n";
         cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-        cout << " 1-Black & White Filter \n 2-Invert Filter \n 3-Merge Filter \n 4-Flip Image \n 5-Darken and lighten Image \n 6-Rotate image\n 7-Detect Image\n 8-Enlarge image \n9-Shrink image\n  0-Exit \nChoose number: ";
-    cin >> filternum;
+        cout << " 1-Black & White Filter \n 2-Invert Filter \n 3-Merge Filter \n 4-Flip Image \n 5-Rotate Image \n 6-Darken and lighten Image\n 7-Detect Edges Filter\n 8-Enlarge Image \n9-Shrink image\n10-Mirror Filter\n11-Shuffle Filter\n12-Blur Filter\n0-Exit \nChoose number: ";
+        cin >> filternum;
     }
 }
+
 //_________________________________________
 void loadImage () {
     char imageFileName[100];
@@ -96,6 +103,7 @@ void loadImage () {
     strcat (imageFileName, ".bmp");
     readGSBMP(imageFileName, image);
 }
+
 //_________________________________________
 void saveImage () {
     char imageFileName[100];
@@ -108,6 +116,18 @@ void saveImage () {
     strcat (imageFileName, ".bmp");
     writeGSBMP(imageFileName, image);
 }
+
+void saveImage2() {
+    char imageFileName[100];
+    // Get gray scale image target file name
+    cout << "Enter the target image file name: ";
+    cin >> imageFileName;
+
+    // Add to it .bmp extension and load image
+    strcat (imageFileName, ".bmp");
+    writeGSBMP(imageFileName, image2);
+}
+
 //____________________________________________
 void loadImage1 () {
     char imageFileName1[100];
@@ -135,7 +155,6 @@ void loadImage2 () {
 }
 
 //_________________________________________
-
 void saveImage3() {
     char imageFileName3[100];
 
@@ -147,6 +166,7 @@ void saveImage3() {
     strcat (imageFileName3, ".bmp");
     writeGSBMP(imageFileName3, image3);
 }
+
 //_________________________________________
 void savenewImage() {
     char imageFileName3[100];
@@ -159,6 +179,7 @@ void savenewImage() {
     strcat (imageFileName3, ".bmp");
     writeGSBMP(imageFileName3, newimage);
 }
+
 //_________________________________________
 void blackandWhite() {
     long average = 0;
@@ -180,6 +201,7 @@ void blackandWhite() {
         }
     }
 }
+
 //_________________________________________
 void flipImage(){
     char choice;
@@ -202,6 +224,7 @@ void flipImage(){
         }
     }
 }
+
 //_________________________________________
 void mirrorFilter() {
     char letter;
@@ -252,7 +275,6 @@ void MergeFunc() {
     }
 }
 
-
 //_________________________________________
 void lightenFunc() {
     for (int i = 0; i < SIZE; i++) {
@@ -262,6 +284,7 @@ void lightenFunc() {
         }
     }
 }
+
 //_________________________________________
 void darkenFunc() {
     for (int i = 0; i < SIZE; i++) {
@@ -271,6 +294,7 @@ void darkenFunc() {
         }
     }
 }
+
 //_________________________________________
 void shrinkFunc() {
     int dim;
@@ -287,3 +311,14 @@ void shrinkFunc() {
     }
 }
 
+void detectImageEdges() {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if (image[i][j] < 130 &&
+                (image[i + 1][j] > 130 || image[i - 1][j] > 130 || image[i][j + 1] > 130 || image[i][j - 1] > 130))
+                image2[i][j] = 0;
+            else
+                image2[i][j] = 255;
+        }
+    }
+}
