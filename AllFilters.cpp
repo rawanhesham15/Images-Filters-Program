@@ -57,8 +57,8 @@ void ImagePart4_4 ();
 int main()
 {
     int filternum;
-    cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-    cout << " 1-Black & White Filter \n 2-Invert Filter \n 3-Merge Filter \n 4-Flip Image \n 5-Rotate Image \n 6-Darken and lighten Image\n7-Detect Edges Filter\n 8-Enlarge Image \n9-Shrink image\n10-Mirror Filter\n11-Shuffle Filter\n12-Blur Filter\n0-Exit \nChoose number: ";
+    cout << "Ahlan ya user ya habibi :)  \nPlease select the filter to apply or 0 to Exit:"<<endl;
+    cout << "1-Black & White Filter \n2-Invert Filter \n3-Merge Filter \n4-Flip Image \n5-Rotate Image \n6-Darken and lighten Image\n7-Detect Edges Filter\n8-Enlarge Image \n9-Shrink image\n10-Mirror Filter\n11-Shuffle Filter\n12-Blur Filter\n0-Exit \nChoose number: ";
     cin >> filternum;
     while(filternum != 0){
         switch(filternum) {
@@ -86,7 +86,7 @@ int main()
             case 5:
                 loadImage();
                 int choose;
-                cout <<"1-Rotate 90.\n 2-Rotate 180.\n 3-Rotate 270." << endl;
+                cout <<"1-Rotate 90.\n2-Rotate 180.\n3-Rotate 270." << endl;
                 cout << "Enter 1,2 or 3:" << endl;
                 cin >> choose;
                 cin.ignore();
@@ -127,33 +127,32 @@ int main()
                 break;
             case 8:
                 loadImage();
-                int choose;
-                cout <<"1-Enlarge Part 1.\n 2-Enlarge Part 2.\n 3-Enlarge Part 3.\n 4-Enlarge Part 4." << endl;
+                int Choose;
+                cout <<"1-Enlarge Part 1.\n2-Enlarge Part 2.\n3-Enlarge Part 3.\n4-Enlarge Part 4." << endl;
                 cout << "Enter Your Choice: " << endl;
-                cin >> choose;
+                cin >> Choose;
                 cin.ignore();
-                if(choose==1) {
+                if(Choose==1) {
                     EnlargePart1();
                     saveImage3();
                 }
-                else if (choose==2) {
+                else if (Choose==2) {
                     EnlargePart2();
                     saveImage4();
                 }
-                else if (choose==3) {
+                else if (Choose==3) {
                     EnlargePart3();
                     saveImage4();
                 }
-                else if (choose==4){
+                else if (Choose==4){
                     EnlargePart4();
                     saveImage4();
                 }
                 else {
-                    cout << "Wrong input enter again";
+                    cout << "Wrong input enter again.";
                     break;
                 }
                 break;
-
             case 9:
                 loadImage();
                 shrinkFunc();
@@ -243,20 +242,21 @@ int main()
                     return 0;
                 }
                 saveImage3();
+                break;
 
             case 12:
                 loadImage();
                 blurFun();
                 saveImage();
-                break;    
+                break;
             default:
                 cout << "INVALID...";
                 break;
         }
         cout << endl;
         cout << "THE FILTER APPLIED SUCCESSFULLY...\n";
-        cout << " Ahlan ya user ya habibi :)  \n Please select the filter to apply or 0 to Exit:"<<endl;
-        cout << " 1-Black & White Filter \n 2-Invert Filter \n 3-Merge Filter \n 4-Flip Image \n 5-Rotate Image \n 6-Darken and lighten Image\n 7-Detect Edges Filter\n 8-Enlarge Image \n9-Shrink image\n10-Mirror Filter\n11-Shuffle Filter\n12-Blur Filter\n0-Exit \nChoose number: ";
+        cout << "Ahlan ya user ya habibi :)  \nPlease select the filter to apply or 0 to Exit:"<<endl;
+        cout << "1-Black & White Filter \n2-Invert Filter \n3-Merge Filter \n4-Flip Image \n5-Rotate Image \n6-Darken and lighten Image\n7-Detect Edges Filter\n8-Enlarge Image \n9-Shrink image\n10-Mirror Filter\n11-Shuffle Filter\n12-Blur Filter\n0-Exit \nChoose number: ";
         cin >> filternum;
     }
 }
@@ -346,6 +346,7 @@ void saveImage4() {
     // Add to it .bmp extension and load image
     strcat(imageFileName, ".bmp");
     writeGSBMP(imageFileName, image4);
+}
 //_________________________________________
 void savenewImage() {
     char imageFileName3[100];
@@ -563,18 +564,18 @@ void RotateImage_270(){
 void EnlargePart1() {
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image2[i][j]=image[i][j];
-                image2[i][j]=image[i+1][j];
-                image2[i][j]=image[i][j+1];
-                image2[i][j]=image[i+1][j+1];
+            image2[i][j]=image[i][j];
+            image2[i][j]=image[i+1][j];
+            image2[i][j]=image[i][j+1];
+            image2[i][j]=image[i+1][j+1];
         }
     }
     for (int i = 0,k=0; i < SIZE; i+=2,k++) {
         for (int j = 0,l=0; j < SIZE; j+=2,l++) {
-                image3[i][j]=image2[k][l];
-                image3[i+1][j]=image2[k][l];
-                image3[i][j+1]=image2[k][l];
-                image3[i+1][j+1]=image2[k][l];
+            image3[i][j]=image2[k][l];
+            image3[i+1][j]=image2[k][l];
+            image3[i][j+1]=image2[k][l];
+            image3[i+1][j+1]=image2[k][l];
         }
     }
 }
@@ -582,23 +583,23 @@ void EnlargePart1() {
 void EnlargePart2(){
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE / 2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-                image3[i][j] = image2[i][j+SIZE/2];
+            image3[i][j] = image2[i][j+SIZE/2];
         }
     }
     for (int i = 0, k = 0; i < SIZE; i += 2, k++) {
         for (int j = 0, l = 0; j < SIZE; j += 2, l++) {
-                image4[i][j] = image3[k][l];
-                image4[i + 1][j] = image3[k][l];
-                image4[i][j + 1] = image3[k][l];
-                image4[i + 1][j + 1] = image3[k][l];
+            image4[i][j] = image3[k][l];
+            image4[i + 1][j] = image3[k][l];
+            image4[i][j + 1] = image3[k][l];
+            image4[i + 1][j + 1] = image3[k][l];
         }
     }
 }
@@ -606,23 +607,23 @@ void EnlargePart2(){
 void EnlargePart3(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image3[i][j]=image2[i+SIZE/2][j];
+            image3[i][j]=image2[i+SIZE/2][j];
         }
     }
     for (int i = 0,k=0; i < SIZE; i+=2,k++) {
         for (int j = 0,l=0; j < SIZE; j+=2,l++) {
-                image4[i][j]=image3[k][l];
-                image4[i+1][j]=image3[k][l];
-                image4[i][j+1]=image3[k][l];
-                image4[i+1][j+1]=image3[k][l];
+            image4[i][j]=image3[k][l];
+            image4[i+1][j]=image3[k][l];
+            image4[i][j+1]=image3[k][l];
+            image4[i+1][j+1]=image3[k][l];
         }
     }
 }
@@ -630,24 +631,24 @@ void EnlargePart3(){
 void EnlargePart4(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = SIZE/2; j < SIZE; j++) {
-                image2[i][j]=image[i][j];
-                image2[i][j]=image[i+1][j];
-                image2[i][j]=image[i][j+1];
-                image2[i][j]=image[i+1][j+1];
+            image2[i][j]=image[i][j];
+            image2[i][j]=image[i+1][j];
+            image2[i][j]=image[i][j+1];
+            image2[i][j]=image[i+1][j+1];
         }
     }
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image3[i][j]=image2[i+SIZE/2][j+SIZE/2];
+            image3[i][j]=image2[i+SIZE/2][j+SIZE/2];
         }
     }
 
     for (int i = 0,k=0; i < SIZE; i+=2,k++) {
         for (int j = 0,l=0; j < SIZE; j+=2,l++) {
-                image4[i][j]=image3[k][l];
-                image4[i+1][j]=image3[k][l];
-                image4[i][j+1]=image3[k][l];
-                image4[i+1][j+1]=image3[k][l];
+            image4[i][j]=image3[k][l];
+            image4[i+1][j]=image3[k][l];
+            image4[i][j+1]=image3[k][l];
+            image4[i+1][j+1]=image3[k][l];
         }
     }
 }
@@ -655,11 +656,11 @@ void EnlargePart4(){
 void ImagePart1_1() {
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
-                image3[i][j]=image2[i][j];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
+            image3[i][j]=image2[i][j];
         }
     }
 }
@@ -667,15 +668,15 @@ void ImagePart1_1() {
 void ImagePart2_1(){
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE / 2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-                image3[i][j] = image2[i][j+SIZE/2];
+            image3[i][j] = image2[i][j+SIZE/2];
         }
     }
 }
@@ -683,15 +684,15 @@ void ImagePart2_1(){
 void ImagePart3_1(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image3[i][j]=image2[i+SIZE/2][j];
+            image3[i][j]=image2[i+SIZE/2][j];
         }
     }
 }
@@ -699,15 +700,15 @@ void ImagePart3_1(){
 void ImagePart4_1() {
     for (int i = SIZE / 2; i < SIZE; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image3[i][j]=image2[i+SIZE/2][j+SIZE/2];
+            image3[i][j]=image2[i+SIZE/2][j+SIZE/2];
         }
     }
 }
@@ -715,15 +716,15 @@ void ImagePart4_1() {
 void ImagePart1_2() {
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE/2 ; i++) {
         for (int j = 0; j < SIZE/2 ; j++) {
-                image3[i][j+SIZE/2] = image2[i][j];
+            image3[i][j+SIZE/2] = image2[i][j];
         }
     }
 }
@@ -731,11 +732,11 @@ void ImagePart1_2() {
 void ImagePart2_2(){
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
-                image3[i][j]=image2[i][j];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
+            image3[i][j]=image2[i][j];
         }
     }
 }
@@ -743,15 +744,15 @@ void ImagePart2_2(){
 void ImagePart3_2(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image3[i][j+128]=image2[i+128][j];
+            image3[i][j+128]=image2[i+128][j];
         }
     }
 }
@@ -759,15 +760,15 @@ void ImagePart3_2(){
 void ImagePart4_2() {
     for (int i = SIZE / 2; i < SIZE; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE; j++) {
-                image3[i][j+128]=image2[i+128][j+128];
+            image3[i][j+128]=image2[i+128][j+128];
         }
     }
 }
@@ -775,15 +776,15 @@ void ImagePart4_2() {
 void ImagePart1_3() {
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image3[i+128][j]=image2[i][j];
+            image3[i+128][j]=image2[i][j];
         }
     }
 }
@@ -791,15 +792,15 @@ void ImagePart1_3() {
 void ImagePart2_3(){
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE / 2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-                image3[i+128][j] = image2[i][j+128];
+            image3[i+128][j] = image2[i][j+128];
         }
     }
 }
@@ -807,11 +808,11 @@ void ImagePart2_3(){
 void ImagePart3_3(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
-                image3[i][j]=image2[i][j];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
+            image3[i][j]=image2[i][j];
         }
     }
 }
@@ -819,15 +820,15 @@ void ImagePart3_3(){
 void ImagePart4_3(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = SIZE/2; j < SIZE; j++) {
-                image2[i][j]=image[i][j];
-                image2[i][j]=image[i+1][j];
-                image2[i][j]=image[i][j+1];
-                image2[i][j]=image[i+1][j+1];
+            image2[i][j]=image[i][j];
+            image2[i][j]=image[i+1][j];
+            image2[i][j]=image[i][j+1];
+            image2[i][j]=image[i+1][j+1];
         }
     }
     for (int i = 0; i < SIZE / 2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-                image3[i+128][j] = image2[i+128][j+128];
+            image3[i+128][j] = image2[i+128][j+128];
         }
     }
 }
@@ -835,15 +836,15 @@ void ImagePart4_3(){
 void ImagePart1_4() {
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE / 2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-                image3[i+128][j+128] = image2[i][j];
+            image3[i+128][j+128] = image2[i][j];
         }
     }
 }
@@ -851,31 +852,31 @@ void ImagePart1_4() {
 void ImagePart2_4(){
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE / 2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-                image3[i+128][j+128] = image2[i][j+128];
+            image3[i+128][j+128] = image2[i][j+128];
         }
-        }
+    }
 }
 //_________________________________________
 void ImagePart3_4(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
         }
     }
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-                image3[i+128][j+128]=image2[i+128][j];
+            image3[i+128][j+128]=image2[i+128][j];
         }
     }
 }
@@ -883,11 +884,12 @@ void ImagePart3_4(){
 void ImagePart4_4() {
     for (int i = SIZE / 2; i < SIZE; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-                image2[i][j] = image[i][j];
-                image2[i][j] = image[i + 1][j];
-                image2[i][j] = image[i][j + 1];
-                image2[i][j] = image[i + 1][j + 1];
-                image3[i][j]=image2[i][j];
+            image2[i][j] = image[i][j];
+            image2[i][j] = image[i + 1][j];
+            image2[i][j] = image[i][j + 1];
+            image2[i][j] = image[i + 1][j + 1];
+            image3[i][j]=image2[i][j];
         }
     }
 }
+//_________________________________________
