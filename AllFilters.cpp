@@ -25,6 +25,7 @@ void darkenFunc();
 void detectImageEdges();
 void shrinkFunc();
 void blurFun();
+void InvertImage ();
 
 
 int main()
@@ -40,6 +41,10 @@ int main()
                 blackandWhite();
                 saveImage();
                 break;
+            case 2:
+                loadImage();
+                InvertImage();
+                saveImage();
             case 3:
                 loadImage1();
                 loadImage2();
@@ -341,3 +346,10 @@ void blurFun() {
     }
 }
 //_________________________________________
+void InvertImage() {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+            image[i][j] = 255- image[i][j];
+        }
+    }
+}
