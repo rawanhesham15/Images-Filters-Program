@@ -24,6 +24,8 @@ void lightenFunc();
 void darkenFunc();
 void detectImageEdges();
 void shrinkFunc();
+void blurFun();
+
 
 int main()
 {
@@ -79,6 +81,11 @@ int main()
                 mirrorFilter();
                 saveImage();
                 break;
+            case 12:
+                loadImage();
+                blurFun();
+                saveImage();
+                break;    
             default:
                 cout << "INVALID...";
                 break;
@@ -116,7 +123,7 @@ void saveImage () {
     strcat (imageFileName, ".bmp");
     writeGSBMP(imageFileName, image);
 }
-
+//_________________________________________
 void saveImage2() {
     char imageFileName[100];
     // Get gray scale image target file name
@@ -310,7 +317,7 @@ void shrinkFunc() {
         }
     }
 }
-
+//_________________________________________
 void detectImageEdges() {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
@@ -322,3 +329,15 @@ void detectImageEdges() {
         }
     }
 }
+//_________________________________________
+void blurFun() {
+
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j< SIZE; j++) {
+//            image[i][j]=(image[i][j-1]+image[i-1][j-1]+image[i-1][j]+image[i-1][j+1]+image[i][j+1]+image[i+1][j+1]+image[i+1][j]+image[i+1][j-1]+image[i][j])/9;
+
+            image[i][j]=(image[i][j-1]+image[i-1][j-1]+image[i-1][j]+image[i-1][j+1]+image[i][j+1]+image[i+1][j+1]+image[i+1][j]+image[i+1][j-1]+image[i-2][j]+image[i-2][j-2]+image[i][j-2]+image[i+2][j-1]+image[i+2][j-1]+image[i+2][j]+image[i][j+2]+image[i-1][j+2]+image[i+2][j+2]+image[i][j])/18;
+        }
+    }
+}
+//_________________________________________
