@@ -15,7 +15,7 @@ void loadImage2 ();
 void saveImage ();
 void saveImage2();
 void saveImage3 ();
-void savenewImage ();
+void savenewImage();
 void blackandWhite();
 void flipImage();
 void mirrorFilter();
@@ -25,7 +25,11 @@ void darkenFunc();
 void detectImageEdges();
 void shrinkFunc();
 void blurFun();
-void InvertImage ();
+void InvertImage();
+void RotateImage_90();
+void RotateImage_180();
+void RotateImage_270();
+
 
 
 int main()
@@ -45,6 +49,7 @@ int main()
                 loadImage();
                 InvertImage();
                 saveImage();
+                break;
             case 3:
                 loadImage1();
                 loadImage2();
@@ -54,6 +59,27 @@ int main()
             case 4:
                 loadImage();
                 flipImage();
+                saveImage();
+                break;
+            case 5:
+                loadImage();
+                int choose;
+                cout <<"1-Rotate 90.\n 2-Rotate 180.\n 3-Rotate 270." << endl;
+                cout << "Enter 1,2 or 3:" << endl;
+                cin >> choose;
+                cin.ignore();
+                if (choose ==1){
+                    RotateImage_90();
+                }
+                else if (choose == 2){
+                    RotateImage_180();
+                }
+                else if (choose == 3){
+                    RotateImage_270();
+                }
+                else
+                    cout<<"Wrong input enter again";
+
                 saveImage();
                 break;
             case 6:
@@ -353,3 +379,44 @@ void InvertImage() {
         }
     }
 }
+//_________________________________________
+void RotateImage_90(){
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if (i > j)
+                swap(image[i][j], image[j][i]);
+
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE/2; j++) {
+            swap(image[i][j],image[i][256-j]);
+
+        }
+    }
+}
+//_________________________________________
+void RotateImage_180() {
+    for (int i = 0; i < SIZE/2 ; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            swap(image[255-i][j], image[i][255-j]);
+        }
+    }
+}
+//_________________________________________
+void RotateImage_270(){
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if (i > j)
+                swap(image[i][j], image[j][i]);
+        }
+    }
+    for (int i = 0; i < SIZE/2; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            swap(image[i][j], image[256-i][j]);
+
+        }
+    }
+}
+//_________________________________________
+//_________________________________________
