@@ -7,6 +7,7 @@ unsigned char image[SIZE][SIZE];
 unsigned char image1[SIZE][SIZE];
 unsigned char image2[SIZE][SIZE];
 unsigned char image3[SIZE][SIZE];
+unsigned char image4[SIZE][SIZE];
 unsigned char newimage[SIZE][SIZE];
 
 void loadImage ();
@@ -15,6 +16,7 @@ void loadImage2 ();
 void saveImage ();
 void saveImage2();
 void saveImage3 ();
+void saveImage4 ();
 void savenewImage();
 void blackandWhite();
 void flipImage();
@@ -29,6 +31,10 @@ void InvertImage();
 void RotateImage_90();
 void RotateImage_180();
 void RotateImage_270();
+void ImagePart1 ();
+void ImagePart2 ();
+void ImagePart3 ();
+void ImagePart4 ();
 
 
 
@@ -77,9 +83,10 @@ int main()
                 else if (choose == 3){
                     RotateImage_270();
                 }
-                else
-                    cout<<"Wrong input enter again";
-
+                else {
+                    cout << "Wrong input enter again";
+                    break;
+                }
                 saveImage();
                 break;
             case 6:
@@ -102,6 +109,35 @@ int main()
                 detectImageEdges();
                 saveImage2();
                 break;
+            case 8:
+                loadImage();
+                int choose;
+                cout <<"1-Enlarge Part 1.\n 2-Enlarge Part 2.\n 3-Enlarge Part 3.\n 4-Enlarge Part 4." << endl;
+                cout << "Enter Your Choice: " << endl;
+                cin >> choose;
+                cin.ignore();
+                if(choose==1) {
+                    ImagePart1();
+                    saveImage3();
+                }
+                else if (choose==2) {
+                    ImagePart2();
+                    saveImage4();
+                }
+                else if (choose==3) {
+                    ImagePart3();
+                    saveImage4();
+                }
+                else if (choose==4){
+                    ImagePart4();
+                    saveImage4();
+                }
+                else {
+                    cout << "Wrong input enter again";
+                    break;
+                }
+                break;
+
             case 9:
                 loadImage();
                 shrinkFunc();
@@ -204,7 +240,16 @@ void saveImage3() {
     strcat (imageFileName3, ".bmp");
     writeGSBMP(imageFileName3, image3);
 }
+//_________________________________________
+void saveImage4() {
+    char imageFileName[100];
 
+    // Get gray scale image target file name
+    cout << "Please enter the target image file name: ";
+    cin >> imageFileName;
+    // Add to it .bmp extension and load image
+    strcat(imageFileName, ".bmp");
+    writeGSBMP(imageFileName, image4);
 //_________________________________________
 void savenewImage() {
     char imageFileName3[100];
@@ -419,4 +464,95 @@ void RotateImage_270(){
     }
 }
 //_________________________________________
+void ImagePart1() {
+    for (int i = 0; i < SIZE/2; i++) {
+        for (int j = 0; j < SIZE/2; j++) {
+                image2[i][j]=image[i][j];
+                image2[i][j]=image[i+1][j];
+                image2[i][j]=image[i][j+1];
+                image2[i][j]=image[i+1][j+1];
+        }
+    }
+    for (int i = 0,k=0; i < SIZE; i+=2,k++) {
+        for (int j = 0,l=0; j < SIZE; j+=2,l++) {
+                image3[i][j]=image2[k][l];
+                image3[i+1][j]=image2[k][l];
+                image3[i][j+1]=image2[k][l];
+                image3[i+1][j+1]=image2[k][l];
+        }
+    }
+}
+//_________________________________________
+    void ImagePart2(){
+        for (int i = 0; i < SIZE/2; i++) {
+            for (int j = SIZE / 2; j < SIZE; j++) {
+                image2[i][j] = image[i][j];
+                image2[i][j] = image[i + 1][j];
+                image2[i][j] = image[i][j + 1];
+                image2[i][j] = image[i + 1][j + 1];
+            }
+        }
+        for (int i = 0; i < SIZE / 2; i++) {
+            for (int j = 0; j < SIZE / 2; j++) {
+                image3[i][j] = image2[i][j+SIZE/2];
+            }
+        }
+        for (int i = 0, k = 0; i < SIZE; i += 2, k++) {
+            for (int j = 0, l = 0; j < SIZE; j += 2, l++) {
+                image4[i][j] = image3[k][l];
+                image4[i + 1][j] = image3[k][l];
+                image4[i][j + 1] = image3[k][l];
+                image4[i + 1][j + 1] = image3[k][l];
+            }
+        }
+    }
+//_________________________________________
+    void ImagePart3(){
+        for (int i = SIZE/2; i < SIZE; i++) {
+            for (int j = 0; j < SIZE/2; j++) {
+                image2[i][j] = image[i][j];
+                image2[i][j] = image[i + 1][j];
+                image2[i][j] = image[i][j + 1];
+                image2[i][j] = image[i + 1][j + 1];
+            }
+        }
+        for (int i = 0; i < SIZE/2; i++) {
+            for (int j = 0; j < SIZE/2; j++) {
+                image3[i][j]=image2[i+SIZE/2][j];
+            }
+        }
+        for (int i = 0,k=0; i < SIZE; i+=2,k++) {
+            for (int j = 0,l=0; j < SIZE; j+=2,l++) {
+                image4[i][j]=image3[k][l];
+                image4[i+1][j]=image3[k][l];
+                image4[i][j+1]=image3[k][l];
+                image4[i+1][j+1]=image3[k][l];
+            }
+        }
+    }
+//_________________________________________
+    void ImagePart4(){
+        for (int i = SIZE/2; i < SIZE; i++) {
+            for (int j = SIZE/2; j < SIZE; j++) {
+                image2[i][j]=image[i][j];
+                image2[i][j]=image[i+1][j];
+                image2[i][j]=image[i][j+1];
+                image2[i][j]=image[i+1][j+1];
+            }
+        }
+        for (int i = 0; i < SIZE/2; i++) {
+            for (int j = 0; j < SIZE/2; j++) {
+                image3[i][j]=image2[i+SIZE/2][j+SIZE/2];
+            }
+        }
+
+        for (int i = 0,k=0; i < SIZE; i+=2,k++) {
+            for (int j = 0,l=0; j < SIZE; j+=2,l++) {
+                image4[i][j]=image3[k][l];
+                image4[i+1][j]=image3[k][l];
+                image4[i][j+1]=image3[k][l];
+                image4[i+1][j+1]=image3[k][l];
+            }
+        }
+    }
 //_________________________________________
