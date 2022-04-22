@@ -1,3 +1,12 @@
+// FCAI – Programming 1 – 2022 - Assignment 3
+// Program Name: AllFilters.cpp
+// Program Description: Program to do filters on images.
+// Last Modification Date: 21/4/2022
+// Author and ID and Group: Rawan Hesham, 20211040, Group A, S1/S2.
+// Author and ID and Group: Nourhan Mahmoud, 20211107, Group A, S1/S2.
+// Author and ID and Group: Mai Mohamed, 20211098, Group A, S1/S2.
+// Purpose: Get a Gray Scale image and produce a filtered image (any filter the user choose).
+
 #include <iostream>
 #include "bmplib.cpp"
 #include <cstring>
@@ -336,6 +345,7 @@ void saveImage3() {
     strcat (imageFileName3, ".bmp");
     writeGSBMP(imageFileName3, image3);
 }
+
 //_________________________________________
 void saveImage4() {
     char imageFileName[100];
@@ -347,6 +357,7 @@ void saveImage4() {
     strcat(imageFileName, ".bmp");
     writeGSBMP(imageFileName, image4);
 }
+
 //_________________________________________
 void savenewImage() {
     char imageFileName3[100];
@@ -490,6 +501,7 @@ void shrinkFunc() {
         }
     }
 }
+
 //_________________________________________
 void detectImageEdges() {
     for (int i = 0; i < SIZE; i++) {
@@ -502,17 +514,17 @@ void detectImageEdges() {
         }
     }
 }
+
 //_________________________________________
 void blurFun() {
 
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j< SIZE; j++) {
-//            image[i][j]=(image[i][j-1]+image[i-1][j-1]+image[i-1][j]+image[i-1][j+1]+image[i][j+1]+image[i+1][j+1]+image[i+1][j]+image[i+1][j-1]+image[i][j])/9;
-
             image[i][j]=(image[i][j-1]+image[i-1][j-1]+image[i-1][j]+image[i-1][j+1]+image[i][j+1]+image[i+1][j+1]+image[i+1][j]+image[i+1][j-1]+image[i-2][j]+image[i-2][j-2]+image[i][j-2]+image[i+2][j-1]+image[i+2][j-1]+image[i+2][j]+image[i][j+2]+image[i-1][j+2]+image[i+2][j+2]+image[i][j])/18;
         }
     }
 }
+
 //_________________________________________
 void InvertImage() {
     for (int i = 0; i < SIZE; i++) {
@@ -521,6 +533,7 @@ void InvertImage() {
         }
     }
 }
+
 //_________________________________________
 void RotateImage_90(){
     for (int i = 0; i < SIZE; i++) {
@@ -537,6 +550,7 @@ void RotateImage_90(){
         }
     }
 }
+
 //_________________________________________
 void RotateImage_180() {
     for (int i = 0; i < SIZE/2 ; i++) {
@@ -545,6 +559,7 @@ void RotateImage_180() {
         }
     }
 }
+
 //_________________________________________
 void RotateImage_270(){
     for (int i = 0; i < SIZE; i++) {
@@ -560,6 +575,7 @@ void RotateImage_270(){
         }
     }
 }
+
 //_________________________________________
 void EnlargePart1() {
     for (int i = 0; i < SIZE/2; i++) {
@@ -579,6 +595,7 @@ void EnlargePart1() {
         }
     }
 }
+
 //_________________________________________
 void EnlargePart2(){
     for (int i = 0; i < SIZE/2; i++) {
@@ -603,6 +620,7 @@ void EnlargePart2(){
         }
     }
 }
+
 //_________________________________________
 void EnlargePart3(){
     for (int i = SIZE/2; i < SIZE; i++) {
@@ -627,6 +645,7 @@ void EnlargePart3(){
         }
     }
 }
+
 //_________________________________________
 void EnlargePart4(){
     for (int i = SIZE/2; i < SIZE; i++) {
@@ -652,6 +671,7 @@ void EnlargePart4(){
         }
     }
 }
+
 //_________________________________________
 void ImagePart1_1() {
     for (int i = 0; i < SIZE/2; i++) {
@@ -664,6 +684,7 @@ void ImagePart1_1() {
         }
     }
 }
+
 //_________________________________________
 void ImagePart2_1(){
     for (int i = 0; i < SIZE/2; i++) {
@@ -680,6 +701,7 @@ void ImagePart2_1(){
         }
     }
 }
+
 //_________________________________________
 void ImagePart3_1(){
     for (int i = SIZE/2; i < SIZE; i++) {
@@ -696,6 +718,7 @@ void ImagePart3_1(){
         }
     }
 }
+
 //_________________________________________
 void ImagePart4_1() {
     for (int i = SIZE / 2; i < SIZE; i++) {
@@ -712,6 +735,7 @@ void ImagePart4_1() {
         }
     }
 }
+
 //_________________________________________
 void ImagePart1_2() {
     for (int i = 0; i < SIZE/2; i++) {
@@ -728,6 +752,7 @@ void ImagePart1_2() {
         }
     }
 }
+
 //_________________________________________
 void ImagePart2_2(){
     for (int i = 0; i < SIZE/2; i++) {
@@ -740,6 +765,7 @@ void ImagePart2_2(){
         }
     }
 }
+
 //_________________________________________
 void ImagePart3_2(){
     for (int i = SIZE/2; i < SIZE; i++) {
@@ -756,6 +782,7 @@ void ImagePart3_2(){
         }
     }
 }
+
 //_________________________________________
 void ImagePart4_2() {
     for (int i = SIZE / 2; i < SIZE; i++) {
@@ -772,6 +799,7 @@ void ImagePart4_2() {
         }
     }
 }
+
 //_________________________________________
 void ImagePart1_3() {
     for (int i = 0; i < SIZE/2; i++) {
@@ -788,6 +816,7 @@ void ImagePart1_3() {
         }
     }
 }
+
 //_________________________________________
 void ImagePart2_3(){
     for (int i = 0; i < SIZE/2; i++) {
@@ -804,6 +833,7 @@ void ImagePart2_3(){
         }
     }
 }
+
 //_________________________________________
 void ImagePart3_3(){
     for (int i = SIZE/2; i < SIZE; i++) {
@@ -816,6 +846,7 @@ void ImagePart3_3(){
         }
     }
 }
+
 //_________________________________________
 void ImagePart4_3(){
     for (int i = SIZE/2; i < SIZE; i++) {
@@ -832,6 +863,7 @@ void ImagePart4_3(){
         }
     }
 }
+
 //_________________________________________
 void ImagePart1_4() {
     for (int i = 0; i < SIZE/2; i++) {
@@ -848,6 +880,7 @@ void ImagePart1_4() {
         }
     }
 }
+
 //_________________________________________
 void ImagePart2_4(){
     for (int i = 0; i < SIZE/2; i++) {
@@ -864,6 +897,7 @@ void ImagePart2_4(){
         }
     }
 }
+
 //_________________________________________
 void ImagePart3_4(){
     for (int i = SIZE/2; i < SIZE; i++) {
@@ -880,6 +914,7 @@ void ImagePart3_4(){
         }
     }
 }
+
 //_________________________________________
 void ImagePart4_4() {
     for (int i = SIZE / 2; i < SIZE; i++) {
@@ -892,4 +927,3 @@ void ImagePart4_4() {
         }
     }
 }
-//_________________________________________
