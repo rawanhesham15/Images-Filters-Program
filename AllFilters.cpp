@@ -13,20 +13,16 @@
 
 using namespace std;
 unsigned char image[SIZE][SIZE];
-unsigned char image1[SIZE][SIZE];
 unsigned char image2[SIZE][SIZE];
 unsigned char image3[SIZE][SIZE];
 unsigned char image4[SIZE][SIZE];
-unsigned char newimage[SIZE][SIZE];
 
 void loadImage ();
-void loadImage1 ();
 void loadImage2 ();
 void saveImage ();
 void saveImage2();
 void saveImage3 ();
 void saveImage4 ();
-void savenewImage();
 void blackandWhite();
 void flipImage();
 void mirrorFilter();
@@ -61,8 +57,7 @@ void ImagePart2_4 ();
 void ImagePart3_4 ();
 void ImagePart4_4 ();
 
-
-
+//-------------------------------------
 int main()
 {
     int filternum;
@@ -82,7 +77,7 @@ int main()
                 saveImage();
                 break;
             case 3:
-                loadImage1();
+                loadImage();
                 loadImage2();
                 MergeFunc();
                 saveImage3();
@@ -165,7 +160,7 @@ int main()
             case 9:
                 loadImage();
                 shrinkFunc();
-                savenewImage();
+                saveImage2();
                 break;
             case 10:
                 loadImage();
@@ -295,6 +290,7 @@ void saveImage () {
     strcat (imageFileName, ".bmp");
     writeGSBMP(imageFileName, image);
 }
+
 //_________________________________________
 void saveImage2() {
     char imageFileName[100];
@@ -305,19 +301,6 @@ void saveImage2() {
     // Add to it .bmp extension and load image
     strcat (imageFileName, ".bmp");
     writeGSBMP(imageFileName, image2);
-}
-
-//____________________________________________
-void loadImage1 () {
-    char imageFileName1[100];
-
-    // Get gray scale image file name
-    cout << "Enter the first source image file name: ";
-    cin >> imageFileName1;
-
-    // Add to it .bmp extension and load image
-    strcat (imageFileName1, ".bmp");
-    readGSBMP(imageFileName1, image1);
 }
 
 //_________________________________________
@@ -356,19 +339,6 @@ void saveImage4() {
     // Add to it .bmp extension and load image
     strcat(imageFileName, ".bmp");
     writeGSBMP(imageFileName, image4);
-}
-
-//_________________________________________
-void savenewImage() {
-    char imageFileName3[100];
-
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName3;
-
-    // Add to it .bmp extension and load image
-    strcat (imageFileName3, ".bmp");
-    writeGSBMP(imageFileName3, newimage);
 }
 
 //_________________________________________
@@ -460,8 +430,7 @@ void mirrorFilter() {
 void MergeFunc() {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-
-            image3[i][j] = (image1[i][j] + image2[i][j])/2 ;
+            image3[i][j] = (image[i][j] + image2[i][j])/2 ;
         }
     }
 }
@@ -496,7 +465,7 @@ void shrinkFunc() {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j< SIZE; j++) {
 
-            newimage[i/(dim/2)][j/(dim/2)]=(image[i+1][j]+image[i][j+1]+image[i+1][j+1]+image[i][j])/dim;
+            image2[i/(dim/2)][j/(dim/2)]=(image[i+1][j]+image[i][j+1]+image[i+1][j+1]+image[i][j])/dim;
 
         }
     }
@@ -580,9 +549,6 @@ void RotateImage_270(){
 void EnlargePart1() {
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-            image2[i][j]=image[i][j];
-            image2[i][j]=image[i+1][j];
-            image2[i][j]=image[i][j+1];
             image2[i][j]=image[i+1][j+1];
         }
     }
@@ -600,9 +566,6 @@ void EnlargePart1() {
 void EnlargePart2(){
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -625,9 +588,6 @@ void EnlargePart2(){
 void EnlargePart3(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -650,9 +610,6 @@ void EnlargePart3(){
 void EnlargePart4(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = SIZE/2; j < SIZE; j++) {
-            image2[i][j]=image[i][j];
-            image2[i][j]=image[i+1][j];
-            image2[i][j]=image[i][j+1];
             image2[i][j]=image[i+1][j+1];
         }
     }
@@ -675,11 +632,7 @@ void EnlargePart4(){
 //_________________________________________
 void ImagePart1_1() {
     for (int i = 0; i < SIZE/2; i++) {
-        for (int j = 0; j < SIZE / 2; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
-            image2[i][j] = image[i + 1][j + 1];
+        for (int j = 0; j < SIZE/2; j++) {
             image3[i][j]=image2[i][j];
         }
     }
@@ -688,15 +641,12 @@ void ImagePart1_1() {
 //_________________________________________
 void ImagePart2_1(){
     for (int i = 0; i < SIZE/2; i++) {
-        for (int j = SIZE / 2; j < SIZE; j++) {
+        for (int j = SIZE/2; j < SIZE; j++) {
             image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
-            image2[i][j] = image[i + 1][j + 1];
         }
     }
-    for (int i = 0; i < SIZE / 2; i++) {
-        for (int j = 0; j < SIZE / 2; j++) {
+    for (int i = 0; i < SIZE/2; i++) {
+        for (int j = 0; j < SIZE/2; j++) {
             image3[i][j] = image2[i][j+SIZE/2];
         }
     }
@@ -706,9 +656,6 @@ void ImagePart2_1(){
 void ImagePart3_1(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -723,9 +670,6 @@ void ImagePart3_1(){
 void ImagePart4_1() {
     for (int i = SIZE / 2; i < SIZE; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -740,9 +684,6 @@ void ImagePart4_1() {
 void ImagePart1_2() {
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -757,10 +698,6 @@ void ImagePart1_2() {
 void ImagePart2_2(){
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
-            image2[i][j] = image[i + 1][j + 1];
             image3[i][j]=image2[i][j];
         }
     }
@@ -770,9 +707,6 @@ void ImagePart2_2(){
 void ImagePart3_2(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -787,9 +721,6 @@ void ImagePart3_2(){
 void ImagePart4_2() {
     for (int i = SIZE / 2; i < SIZE; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -804,9 +735,6 @@ void ImagePart4_2() {
 void ImagePart1_3() {
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -821,9 +749,6 @@ void ImagePart1_3() {
 void ImagePart2_3(){
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -838,10 +763,6 @@ void ImagePart2_3(){
 void ImagePart3_3(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
-            image2[i][j] = image[i + 1][j + 1];
             image3[i][j]=image2[i][j];
         }
     }
@@ -851,9 +772,6 @@ void ImagePart3_3(){
 void ImagePart4_3(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = SIZE/2; j < SIZE; j++) {
-            image2[i][j]=image[i][j];
-            image2[i][j]=image[i+1][j];
-            image2[i][j]=image[i][j+1];
             image2[i][j]=image[i+1][j+1];
         }
     }
@@ -868,9 +786,6 @@ void ImagePart4_3(){
 void ImagePart1_4() {
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = 0; j < SIZE / 2; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -885,9 +800,6 @@ void ImagePart1_4() {
 void ImagePart2_4(){
     for (int i = 0; i < SIZE/2; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -902,9 +814,6 @@ void ImagePart2_4(){
 void ImagePart3_4(){
     for (int i = SIZE/2; i < SIZE; i++) {
         for (int j = 0; j < SIZE/2; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
             image2[i][j] = image[i + 1][j + 1];
         }
     }
@@ -919,10 +828,6 @@ void ImagePart3_4(){
 void ImagePart4_4() {
     for (int i = SIZE / 2; i < SIZE; i++) {
         for (int j = SIZE / 2; j < SIZE; j++) {
-            image2[i][j] = image[i][j];
-            image2[i][j] = image[i + 1][j];
-            image2[i][j] = image[i][j + 1];
-            image2[i][j] = image[i + 1][j + 1];
             image3[i][j]=image2[i][j];
         }
     }
